@@ -12,7 +12,6 @@ class ContactIndex extends React.Component{
         return(
             <div>
                 <Header />
-                
                 <div className="container" style={{minHeight:"85vh"}}>
                     <div className="row py-3">
                         <div className="col-4 offset-2">
