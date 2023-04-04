@@ -58,6 +58,20 @@ class AddContact extends React.Component {
                   name="contactPhone"
                 ></input>
               </div>
+              {this.state.errorMessage == undefined ? (
+                <div></div>
+              ) : (
+                <div className="col-12 text-center text-danger">
+                  {this.state.errorMessage}
+                </div>
+              )}
+              {this.state.successMessage == undefined ? (
+                <div></div>
+              ) : (
+                <div className="col-12 text-center text-success">
+                  {this.state.successMessage}
+                </div>
+              )}
               <div className="col-12 col-md-4 p-1 offset-md-4">
                 <button className="btn btn-primary btn-sm form-control">
                   Create
