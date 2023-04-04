@@ -1,9 +1,10 @@
 import logo from "../../images/logo.svg"
 
 const headerStyle = {
-    backgroundColor: "black",
     fontSize: 30,
     fontWeight: "bold",
+    color: "white",
+    borderBottom: "1px solid white",
     padding: 15
 };
 

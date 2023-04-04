@@ -18,7 +18,7 @@ class ContactIndex extends React.Component{
                         <div className="col-4 offset-2">
                             <AddRandomContact />
                         </div>
-                        <div className="col-4 offset-2">
+                        <div className="col-4">
                            <RemoveAllContact />
                         </div> 
                         <div className="row py-2">
