@@ -36,12 +36,17 @@ class AddContact extends React.Component {
             onSubmit={this.handleAddContactFormSubmit}
           >
             <div className="row p-2">
-              <div className="col-12 text-white-50">Add a new Contact</div>
+              <div className="col-12 text-white-50">
+                {this.props.isUpdating ? "Update contact" : "Add a new contact"}
+              </div>
               <div className="col-12 col-md-4 p-1">
                 <input
                   className="form-control form-control-sm"
                   placeholder="Name..."
                   name="contactName"
+                  defaultValue={
+                    this.props.isUpdating ? this.props.selectedContact.name : ""
+                  }
                 ></input>
               </div>
               <div className="col-12 col-md-4 p-1">
@@ -49,6 +54,11 @@ class AddContact extends React.Component {
                   className="form-control form-control-sm"
                   placeholder="Email..."
                   name="contactEmail"
+                  defaultValue={
+                    this.props.isUpdating
+                      ? this.props.selectedContact.email
+                      : ""
+                  }
                 ></input>
               </div>
               <div className="col-12 col-md-4 p-1">
@@ -56,6 +66,11 @@ class AddContact extends React.Component {
                   className="form-control form-control-sm"
                   placeholder="Phone..."
                   name="contactPhone"
+                  defaultValue={
+                    this.props.isUpdating
+                      ? this.props.selectedContact.phone
+                      : ""
+                  }
                 ></input>
               </div>
               {this.state.errorMessage == undefined ? (
@@ -72,10 +87,23 @@ class AddContact extends React.Component {
                   {this.state.successMessage}
                 </div>
               )}
-              <div className="col-12 col-md-4 p-1 offset-md-4">
+              <div
+                className={`col-12 p-1 ${
+                  this.props.isUpdating
+                    ? "col-md-4 offset-md-2"
+                    : "col-md-6 offset-md-3"
+                }`}
+              >
                 <button className="btn btn-primary btn-sm form-control">
-                  Create
+                  {this.props.isUpdating ? "Update" : "Create"}
                 </button>
+              </div>
+              <div className={"col-12 col-md-4 p-1"}>
+                {this.props.isUpdating && (
+                  <button className="btn btn-secondary btn-sm form-control">
+                    Cancel
+                  </button>
+                )}
               </div>
             </div>
           </form>
