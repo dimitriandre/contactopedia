@@ -14,17 +14,32 @@ class AddContact extends React.Component {
     const name = e.target.elements.contactName.value.trim();
     const email = e.target.elements.contactEmail.value.trim();
     const phone = e.target.elements.contactPhone.value.trim();
-    const response = this.props.handleAddContact({
-      name: name,
-      email: email,
-      phone: phone,
-    });
+    const id = e.target.elements.contactId.value.trim();
+    let response = undefined;
+    if (this.props.isUpdating) {
+      response = this.props.handleUpdateContact({
+        name: name,
+        email: email,
+        phone: phone,
+        id: id,
+      });
+    } else {
+      response = this.props.handleAddContact({
+        name: name,
+        email: email,
+        phone: phone,
+      });
+    }
     if (response.status == "success") {
       this.setState({ errorMessage: undefined, successMessage: response.msg });
       document.querySelector(".contact-form").reset();
     } else {
       this.setState({ errorMessage: response.msg, successMessage: undefined });
     }
+  };
+
+  handleCancel = () => {
+    this.props.cancelUpdateContact();
   };
 
   render() {
@@ -35,6 +50,13 @@ class AddContact extends React.Component {
             className="contact-form"
             onSubmit={this.handleAddContactFormSubmit}
           >
+            <input
+              hidden
+              name="contactId"
+              defaultValue={
+                this.props.isUpdating ? this.props.selectedContact.id : ""
+              }
+            ></input>
             <div className="row p-2">
               <div className="col-12 text-white-50">
                 {this.props.isUpdating ? "Update contact" : "Add a new contact"}
@@ -100,7 +122,10 @@ class AddContact extends React.Component {
               </div>
               <div className={"col-12 col-md-4 p-1"}>
                 {this.props.isUpdating && (
-                  <button className="btn btn-secondary btn-sm form-control">
+                  <button
+                    className="btn btn-secondary btn-sm form-control"
+                    onClick={this.handleCancel}
+                  >
                     Cancel
                   </button>
                 )}
